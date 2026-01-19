@@ -32,7 +32,7 @@ on:
 
 jobs:
   configure:
-    runs-on: ubuntu-latest
+    runs-on: s390x
     name: Configure Workflow
     outputs:
       is-draft: ${{ steps.check-draft-pr.outputs.is-draft }}
@@ -62,7 +62,7 @@ jobs:
 
   load-catalog:
     needs: [configure]
-    runs-on: ubuntu-latest
+    runs-on: s390x
     name: Load Test Catalog
     steps:
       - name: Checkout main
@@ -110,7 +110,7 @@ jobs:
 
   validate:
     needs: [configure]
-    runs-on: ubuntu-latest
+    runs-on: s390x
     name: Compile and Check (Merge Ref)
     steps:
       - name: Env
@@ -176,7 +176,7 @@ jobs:
   test:
     needs: [configure, validate, load-catalog]
     if: ${{ ! needs.configure.outputs.is-draft }}
-    runs-on: ubuntu-latest
+    runs-on: s390x
     strategy:
       fail-fast: false
       matrix:
@@ -277,7 +277,7 @@ jobs:
   collate-test-catalog:
     name: Collate Test Catalog
     needs: test
-    runs-on: ubuntu-latest
+    runs-on: s390x
     outputs:
       uploaded-test-catalog: ${{ steps.archive-test-catalog.outcome == 'success' }}
     steps:
@@ -329,7 +329,7 @@ jobs:
     name: Update Test Catalog
     needs: collate-test-catalog
     if: ${{ inputs.is-trunk && needs.collate-test-catalog.outputs.uploaded-test-catalog == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: s390x
     permissions:
       contents: write
     steps:
@@ -367,7 +367,7 @@ jobs:
     name: "CI checks completed"
     needs: [configure, validate, test]
     if: always()
-    runs-on: ubuntu-latest
+    runs-on: s390x
     steps:
       - name: Env
         run: printenv
