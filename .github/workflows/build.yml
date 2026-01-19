@@ -121,8 +121,7 @@ jobs:
         with:
           persist-credentials: false
           ref: ${{ github.sha }}  # this is the default, just being explicit.
-      - name: Setup Python
-        uses: ./.github/actions/setup-python
+     
       - name: Setup Gradle
         uses: ./.github/actions/setup-gradle
         with:
@@ -195,8 +194,7 @@ jobs:
         with:
           persist-credentials: false
           ref: ${{ needs.configure.outputs.sha }}
-      - name: Setup Python
-        uses: ./.github/actions/setup-python
+     
       - name: Setup Gradle
         uses: ./.github/actions/setup-gradle
         with:
