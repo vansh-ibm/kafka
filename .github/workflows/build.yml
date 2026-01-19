@@ -89,8 +89,7 @@ jobs:
           git switch --detach $SHA
           git show --no-patch
 
-      - name: Setup Python
-        uses: ./.github/actions/setup-python
+     
 
       # Prior to this step, we don't expect any errors. For the rest of this "load-catalog" job, we need to ensure
       # we do not fail as this will fail the overall workflow.
