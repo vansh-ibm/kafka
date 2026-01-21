@@ -88,6 +88,8 @@ runs:
       # since that is redundant.
       run: |
         set +e
+        java -version
+        ./gradlew --version
         ./.github/scripts/thread-dump.sh &
         timeout ${TIMEOUT_MINUTES}m ./gradlew --build-cache --continue --no-scan \
         -PtestLoggingEvents=started,passed,skipped,failed \
